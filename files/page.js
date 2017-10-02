@@ -474,6 +474,8 @@ var TARGET_DATE = "2017-11-04T18:00:00.000Z";
 // var TARGET_DATE = "2017-09-04T18:00:00.000Z";
 
 function initCountdown() {
+	$('#countdown').show();
+
 	var canvas = document.getElementById('countdown-progress');
 	var ctx = canvas.getContext('2d');
 	canvas.width = 480;
