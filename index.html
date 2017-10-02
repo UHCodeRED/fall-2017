@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>CodeRED Exploration</title>
+	<link rel="stylesheet" type="text/css" href="/files/styles.css"/>
+	<link rel="Shortcut Icon" href="/files/codered.ico" />
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<script src="/files/jquery-1.9.1.min.js"></script>
+	<script src="/files/jquery.waypoints.min.js"></script>
+</head>
+<body>
+	<canvas id="bg"></canvas>
+
+	<div id="menu">
+		<a href="#" id="menu-button"><span></span></a>
+		<div id="menu-items"><!-- here be .menu-item[] --></div>
+	</div>
+
+	<!-- MLH Badge -->
+	<a id="mlh-trust-badge" style="display:block;max-width:100px;min-width:60px;position:fixed;left:50px;top:0;width:10%;z-index:10000;border:none;outline:none" href="https://mlh.io/seasons/na-2018/events?utm_source=na-2018&utm_medium=TrustBadge&utm_campaign=na-2018&utm_content=white" target="_blank">
+		<img src="https://s3.amazonaws.com/logged-assets/trust-badge/2018/gray.svg" alt="Major League Hacking 2018 Hackathon Season" style="width:100%">
+	</a>
+
+
+	<div id="content">
+		<div id="above-fold">
+			<div id="head">
+				<h1 id="codered-logo">
+					<img src="/files/new-logo.svg" width="480" alt="CodeRED Exploration" />
+				</h1>
+
+				<a id="apply-btn" href="#">
+					Apply
+				</a>
+			</div>
+
+			<div id="countdown" class="section-content">
+				<h2>Event launch in</h2>
+				<div class="timer">
+					T<span class="sign">-</span><span class="days">??</span>:<span class="hours">??</span>:<span class="minutes">??</span>:<span class="seconds">??</span>
+				</div>
+				<div class="progress-bar">
+					<canvas id="countdown-progress" width="480" height="32"></canvas>
+				</div>
+			</div>
+		</div>
+
+		<div id="about" class="section">
+			<div class="section-head">
+				<h1>About CodeRED</h1>
+				<h2>Something witty</h2>
+			</div>
+
+			<div class="section-content columns columns-2">
+
+				<div class="column-box">
+					<h3>What is a Hackathon</h3>
+					<p>
+						An innovative event typically lasting 12-36 hours, in which participants work in small teams to build software and hardware solutions to real-life problems. Our hackathon includes fun mini-events, team building exercises, workshops, and more!
+					</p>
+				</div>
+
+				<div class="column-box">
+					<h3>What's new this time</h3>
+					<p>
+						TODO, talk about tracks
+					</p>
+				</div>
+
+				<div class="clear"></div>
+			</div>
+		</div>
+
+		<div id="faq" class="section">
+			<div class="section-head">
+				<h1>Questions &amp; Answers</h1>
+				<h2>You have questions. We have answers.</h2>
+			</div>
+
+			<div class="section-content columns columns-2">
+
+				<!-- <div class="column-3-2"> -->
+
+					<!-- <h3>Latest Posts on my blog</h3> -->
+					<!-- <div class="blog-articles"> -->
+
+					<!-- {% for question in site.faq %}
+					<h4>{{ question.question }}</h4>
+					<p class="answer">
+						{{ question.title }}
+					</p>
+					{% endfor %} -->
+
+				<div class="column-box">
+					<h4>
+						Does CodeRED Exploration cost money?
+					</h4>
+					<p class="answer">
+						Participating is free for all student hackers. The event is funded by sponsors who provide useful technology and awesome job opportunities.
+					</p>
+
+					<h4>
+						Who can participate in CodeRED Exploration?
+					</h4>
+					<p class="answer">
+						All student hackers who are 16 by November 4th, 2017 can attend. This includes high school, undergraduate, and graduate students.
+					</p>
+
+					<h4>
+						When do applications close?
+					</h4>
+					<p class="answer">
+						The last day to submit applications is <b>INSERT_DATE</b>. Apply now to ensure you get accepted!
+					</p>
+
+					<h4>
+						What should I bring?
+					</h4>
+					<p class="answer">
+						A laptop or desktop computer, student ID, chargers, a sleeping bag if desired, and any personal items.
+					</p>
+
+					<h4>
+						How do I get to CodeRED Exploration?
+					</h4>
+					<p class="answer">
+						Buses will be provided to select schools within Texas. Travel reimbursements will also be given to those who qualify, and the deadline to apply is October 21st, 2017. Plan ahead, and apply for reimbursement early!
+					</p>
+
+					<h4>
+						I drove myself, where can I park?
+					</h4>
+					<p class="answer">
+						CodeRED Exploration provides free parking to all hackers attending the event. Maps will be sent by email.
+					</p>
+
+					<h4>
+						What if I&rsquo;m international?
+					</h4>
+					<p class="answer">
+						CodeRED Exploration will not be offering travel reimbursements for international travel.
+					</p>
+				</div>
+
+				<div class="column-box">
+
+					<h4>
+						What if I get hungry?
+					</h4>
+					<p class="answer">
+						We will be providing lunch/dinner for the first day and breakfast/lunch on the second. Snacks, drinks and other miscellaneous food items will be provided throughout the night. Vegetarian and gluten free options will be available to those who specify it on their application.
+					</p>
+
+					<h4>
+						How do teams work?
+					</h4>
+					<p class="answer">
+						We suggest teams of no more than four, as prizes are limited to four per team. If you already have a team, you can identify your teammates by email on the application.
+					</p>
+
+					<h4>
+						What if I don't have a team?
+					</h4>
+					<p class="answer">
+						You can always form a team at the event, or you can work solo. Some of the best projects and hackathon experiences come from meeting and working with other makers and hackers!
+					</p>
+
+					<h4>
+						What if I don't know how to code?
+					</h4>
+					<p class="answer">
+						That's okay! We don't actually have any requirement stating you need to have experience. You will probably want to form a team with people who do, though! A huge part of the hackathon experience is learning new ideas and technologies from other hackers, our mentors, and our sponsors.
+					</p>
+
+					<h4>
+						Can I be a volunteer?
+					</h4>
+					<p class="answer">
+						Yes, we would love your help. <a href="http://cougarcs.com/codered-volunteer/" target="_blank">Sign up to volunteer here</a>.
+					</p>
+
+					<h4>
+						Does CodeRED Exploration have a Code of Conduct?
+					</h4>
+					<p class="answer">
+						Yes, all attendees, sponsors, staff and volunteers at our event are required to abide by the Major League Hacking <a href="http://static.mlh.io/docs/mlh-code-of-conduct.pdf">Code of Conduct</a>.
+					</p>
+				</div>
+			</div>
+
+			<div class="note">
+				<p>Have a question that we didn't answer here?<br>
+				Drop us a line at <a href="mailto:hackathon@cougarcs.com">hackathon@cougarcs.com</a> and we'll do our best to help!</p>
+
+			</div>
+			<div class="clear"></div>
+		</div>
+
+
+		<!--
+		<div id="winners" class="section">
+			<div class="section-head">
+				<h1>Winning Hacks</h1>
+				<h2>Drumroll please&hellip;</h2>
+			</div>
+
+			{% for winner in site.winners %}
+			<div class="section-content columns columns-1">
+				<div class="column-box project">
+					<img class="project-screenshot" src=""/>
+					<h3>{{ winner.title }} <span class="prize">{{ winner.prize }}</span></h3>
+					<p class="available">
+						<a class="button" href="{{ winner.action_url }}">{{ winner.action_text }}</a>
+					</p>
+					<p>{{ winner.description }}</p>
+				</div>
+			</div>
+			{% endfor %}
+
+			<div class="clear"></div>
+		</div>
+		-->
+
+		<div id="schedule" class="section">
+			<div class="section-head">
+				<h1>Schedule</h1>
+				<h2>What's happening, where, and when.</h2>
+			</div>
+
+			<div class="section-content columns">
+				<div class="column-box">
+					<p>
+						CodeRED Plus will take place at the <a href="https://www.google.com/maps/place/University+of+Houston/" target="_blank">University of Houston Main Campus</a>. It will begin at noon on Saturday, November 4th and run until Sunday afternoon on November 5th. Our full schedule will be announced by email and updated here a few weeks before the event.
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div id="sponsors" class="section">
+			<div class="section-head">
+				<h1>Sponsors</h1>
+				<h2>Proudly brought to you by the following companies</h2>
+			</div>
+
+			<div class="section-content columns">
+				<ul class="companies column-box">
+					<li>
+						<a href="https://mlh.io/">
+							<img class="company-logo" src="/files/mlh-logo-white.svg" alt="Major League Hacking">
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/">
+							<img class="company-logo" src="/files/github-logo.svg" alt="GitHub">
+						</a>
+					</li>
+					<li>
+						<a href="https://www.bloomberg.com/">
+							<img class="company-logo" src="/files/bloomberg-logo.svg" alt="Bloomberg">
+						</a>
+					</li>
+					<li>
+						<a href="https://www.microsoft.com/">
+							<img class="company-logo" src="/files/microsoft-logo.svg" alt="Microsoft">
+						</a>
+					</li>
+					<li>
+						<a href="http://csgirls.org">
+							<img class="company-logo" src="/files/CSGirls.svg" alt="CSGirls">
+						</a>
+					</li>
+					<li>
+						<a href="http://redlabs.uh.edu.org">
+							<img class="company-logo" src="/files/REDLabs.svg" alt="RED Labs">
+						</a>
+					</li>
+					<li>
+						<a href="https://www.simnet.org">
+							<img class="company-logo" src="/files/SIM.svg" alt="SIM | Where IT Leaders Connect">
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="organizers" class="section">
+			<div class="section-head">
+				<h1>Organizers</h1>
+				<h2>Meet the Team Behind CodeRED</h2>
+			</div>
+			<div class="section-content columns columns-1">
+				<div class="organizer-grid">
+					<!-- {% for organizer in site.data.organizers %}
+					<div class="organizer">
+						<div class="organizer-bg" style="background-image: url(/files/organizers/{{ organizer.photo }});"></div>
+						<div class="organizer-info">
+							<span class="organizer-name">{{ organizer.first_name }}</span>
+							<span class="organizer-role">{{ organizer.role }}</span>
+						</div>
+					</div>
+					{% endfor %} -->
+					<div class="organizer">
+						<div class="organizer-bg" style="background-image: url(/files/organizers/max.jpg);"></div>
+						<div class="organizer-info">
+							<span class="organizer-name">Maxwell Ciotti</span>
+							<span class="organizer-role">Lead Designer</span>
+						</div>
+					</div>
+					<div class="organizer">
+						<div class="organizer-bg" style="background-image: url(/files/organizers/max.jpg);"></div>
+						<div class="organizer-info">
+							<span class="organizer-name">Maxwell Ciotti</span>
+							<span class="organizer-role">Lead Designer</span>
+						</div>
+					</div>
+					<div class="organizer">
+						<div class="organizer-bg" style="background-image: url(/files/organizers/max.jpg);"></div>
+						<div class="organizer-info">
+							<span class="organizer-name">Maxwell Ciotti</span>
+							<span class="organizer-role">Lead Designer</span>
+						</div>
+					</div>
+					<div class="organizer">
+						<div class="organizer-bg" style="background-image: url(/files/organizers/max.jpg);"></div>
+						<div class="organizer-info">
+							<span class="organizer-name">Maxwell Ciotti</span>
+							<span class="organizer-role">Lead Designer</span>
+						</div>
+					</div>
+					<div class="organizer">
+						<div class="organizer-bg" style="background-image: url(/files/organizers/max.jpg);"></div>
+						<div class="organizer-info">
+							<span class="organizer-name">Maxwell Ciotti</span>
+							<span class="organizer-role">Lead Designer</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="foot">
+			<!-- <p>
+				Organized by <a href="http://www.cougarcs.com" target="_blank">CougarCS</a>, an ACM chapter at the University of Houston.
+			</p> -->
+		</div>
+	</div>
+
+	<script type="text/javascript" src="/files/page.js"></script>
+</body>
+</html>
