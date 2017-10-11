@@ -3,20 +3,21 @@
 <head>
 	<meta charset="utf-8">
 	<title>CodeRED Exploration</title>
-	<!-- <base href="https://uhcodered.github.io/fall17/"> -->
 	<link rel="stylesheet" type="text/css" href="files/styles.css"/>
 	<link rel="Shortcut Icon" href="files/codered.ico" />
-	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<meta name="viewport" content="width=512, initial-scale=0.75"/>
+	<meta name="theme-color" content="#111111">
 	<script src="files/jquery-1.9.1.min.js"></script>
 	<script src="files/jquery.waypoints.min.js"></script>
+	<script src="files/main.js"></script>
 </head>
 <body>
-	<!-- <canvas id="bg"></canvas> -->
+	<canvas id="bg"></canvas>
 
-	<div id="menu">
+	<!-- <div id="menu">
 		<a href="#" id="menu-button"><span></span></a>
-		<div id="menu-items"><!-- here be .menu-item[] --></div>
-	</div>
+		<div id="menu-items"></div>
+	</div> -->
 
 	<!-- MLH Badge -->
 	<a id="mlh-trust-badge" style="display:block;max-width:100px;min-width:60px;position:fixed;left:50px;top:0;width:10%;z-index:10000;border:none;outline:none" href="https://mlh.io/seasons/na-2018/events?utm_source=na-2018&utm_medium=TrustBadge&utm_campaign=na-2018&utm_content=white" target="_blank">
@@ -31,10 +32,52 @@
 					<img src="files/new-logo.svg" width="480" alt="CodeRED Exploration" />
 				</h1>
 
-				<a id="apply-btn" href="#">
+				<div class="event-info">
+					<div class="columns">
+						<div class="column-box event-date decode-in">
+							November.04-05
+						</div>
+						<div class="column-box event-location decode-in">
+							USA.TX.Houston
+						</div>
+					</div>
+					<p class="columns">
+						<span class="column-box decode-in">Houston's</span>
+						<span class="column-box decode-in">premier</span>
+						<span class="column-box decode-in">innovation</span>
+						<span class="column-box decode-in">experience</span>
+					</p>
+					<div class="columns">
+						<div class="column-box event-track decode-in">
+							AR/VR
+						</div>
+						<div class="column-box event-track decode-in">
+							IoT
+						</div>
+						<div class="column-box event-track decode-in">
+							Data Science
+						</div>
+					</div>
+					<div class="columns">
+						<div class="column-box event-partner decode-in">
+							MLH
+						</div>
+						<div class="column-box event-year decode-in">
+							2017
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="main-actions">
+				<!-- <a id="apply-btn" class="typeform-share button" href="https://coderedexploration.typeform.com/to/sPGlhn" data-mode="popup" data-hide-footer="true" data-hide-headers="true" data-transparency="100">
+					Apply
+				</a> -->
+				<a id="apply-btn" href="/apply/">
 					Apply
 				</a>
 			</div>
+			<!-- <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm_share", b="https://embed.typeform.com/"; if(!gi.call(d,id)){ js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script> -->
 
 			<div id="countdown" class="section-content">
 				<h2>Event launch in</h2>
@@ -46,7 +89,7 @@
 				</div>
 			</div>
 		</div>
-<!--
+
 		<div id="about" class="section">
 			<div class="section-head">
 				<h1>About CodeRED</h1>
@@ -65,11 +108,10 @@
 				<div class="column-box">
 					<h3>What's new this time</h3>
 					<p>
-						TODO, talk about tracks
+					    CodeRED Exploration will feature three tracks: <strong>Internet of Things</strong>, <strong>Augmented and Virtual Reality</strong>, and <strong>Data Science</strong>. Teams can submit their projects to one of these tracks for a chance to win one of the great prizes for that track. Even if the project does not fall under a particular track, the team will have a chance to take home the general prize.
 					</p>
 				</div>
 
-				<div class="clear"></div>
 			</div>
 		</div>
 
@@ -100,7 +142,7 @@
 						When do applications close?
 					</h4>
 					<p class="answer">
-						The last day to submit applications is <b>INSERT_DATE</b>. Apply now to ensure you get accepted!
+                        There's no deadline, but apply sooner to ensure your spot is secured!
 					</p>
 
 					<h4>
@@ -183,9 +225,8 @@
 				Drop us a line at <a href="mailto:hackathon@cougarcs.com">hackathon@cougarcs.com</a> and we'll do our best to help!</p>
 
 			</div>
-			<div class="clear"></div>
 		</div>
-
+<!--
 		<div id="winners" class="section">
 			<div class="section-head">
 				<h1>Winning Hacks</h1>
@@ -207,7 +248,7 @@
 
 			<div class="clear"></div>
 		</div>
-
+--><!--
 		<div id="schedule" class="section">
 			<div class="section-head">
 				<h1>Schedule</h1>
@@ -222,7 +263,7 @@
 				</div>
 			</div>
 		</div>
-
+-->
 		<div id="sponsors" class="section">
 			<div class="section-head">
 				<h1>Sponsors</h1>
@@ -241,35 +282,35 @@
 							<img class="company-logo" src="files/github-logo.svg" alt="GitHub">
 						</a>
 					</li>
-					<li>
+					<!--<li>
 						<a href="https://www.bloomberg.com/">
 							<img class="company-logo" src="files/bloomberg-logo.svg" alt="Bloomberg">
 						</a>
-					</li>
-					<li>
+					</li>-->
+					<!--<li>
 						<a href="https://www.microsoft.com/">
 							<img class="company-logo" src="files/microsoft-logo.svg" alt="Microsoft">
 						</a>
-					</li>
+					</li>-->
 					<li>
 						<a href="http://csgirls.org">
-							<img class="company-logo" src="files/CSGirls.svg" alt="CSGirls">
+							<img class="company-logo" src="files/logos/CSGirls.svg" alt="CSGirls">
 						</a>
 					</li>
 					<li>
 						<a href="http://redlabs.uh.edu.org">
-							<img class="company-logo" src="files/REDLabs.svg" alt="RED Labs">
+							<img class="company-logo" src="files/logos/REDLabs.svg" alt="RED Labs">
 						</a>
 					</li>
-					<li>
+					<!--<li>
 						<a href="https://www.simnet.org">
 							<img class="company-logo" src="files/SIM.svg" alt="SIM | Where IT Leaders Connect">
 						</a>
-					</li>
+					</li>-->
 				</ul>
 			</div>
 		</div>
-
+<!--
 		<div id="organizers" class="section">
 			<div class="section-head">
 				<h1>Organizers</h1>
@@ -324,14 +365,13 @@
 				</div>
 			</div>
 		</div>
-
+-->
 		<div id="foot">
-			<!- <p>
+			<p>
 				Organized by <a href="http://www.cougarcs.com" target="_blank">CougarCS</a>, an ACM chapter at the University of Houston.
-			</p> ->
+			</p>
 		</div>
 	</div>
--->
-	<script type="text/javascript" src="files/page.js"></script>
+
 </body>
 </html>

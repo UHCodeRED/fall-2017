@@ -1,217 +1,69 @@
-// ----------------------------------------------------------------------------
-// Scroll Tips
+$(window).ready(function () { "use strict";
 
-(function(window) { "use strict";
-
-var scrollTips = [];
-var isMobile = /iPhone|iPad|android|Windows Phone/i.test(navigator.userAgent);
-
-Number.prototype.limit = function(min, max) {
-	return Math.min(Math.max(this, min), max);
-};
-
-var getStyleValue = function(elem, style) {
-	var $elem = $(elem).hide().appendTo($('body'));
-	var val = $elem.css(style);
-    $elem.remove();
-    return val;
-};
-
-
-var initMenu = function() {
-
-	// Hamburger Menu for mobile
-	if( isMobile ) {
-
-		var menu = $('#menu');
-		var menuItems = $('#menu-items');
-		$('.section').each(function(){
-			var title = $(this).find('h1').text();
-			var item = $('<a class="menu-item"/>')
-				.attr('href', '#'+this.id)
-				.text(title)
-				.click(scrollTo)
-				.appendTo(menuItems);
-		});
-
-		menu.show();
-		$('#menu-button').click(function(){
-			menuItems.slideToggle('fast');
-			return false;
-		});
-	}
-
-	// Scroll tips for Desktop
-	else {
-		$('.section').each(function(){
-			var sectionDiv = $(this);
-			var title = sectionDiv.find('h1').text();
-
-			var scrollTip = $('<a class="scroll-tip"/>')
-				.attr('href', '#'+this.id)
-				.text(title)
-				.click(scrollTo)
-				.appendTo('body');
-
-			scrollTips.push({
-				name: this.id,
-				tip: scrollTip,
-				target: $('#'+this.id),
-				targetPos: 0,
-			});
-		});
-
-		$(window).scroll(onscroll);
-	}
-};
-
-
-var onresize = function() {
-	// Set the first section margin so that the intro is on the screen alone
-	var section = $('.section:first');
-	var intro = $('#intro');
-	var sectionWidth = section.width();
-	var windowHeight = $(window).height();
-
-	// Set column count
-	var i;
-	for( i = 0; i < columnWidths.length; i++ ) {
-		var w = columnWidths[i];
-		if( sectionWidth < w ) { break; }
-	}
-	var columnsClass = 'columns-' + Math.max(i,1);
-
-	$('div.columns')
-		.removeClass('columns-1')
-		.removeClass('columns-2')
-		.removeClass('columns-3')
-		.addClass(columnsClass);
-
-
-	// Set scroll tip targets
-	for( i = 0; i < scrollTips.length; i++ ) {
-		var t = scrollTips[i];
-		t.targetPos = t.target.offset().top;
-	}
-
-	if( !isMobile ) {
-		onscroll();
-	}
-};
-
-
-var onscroll = function() {
-	var windowHeight = $(window).height();
-	var bodyHeight = $('#content').height();
-	var scrollPos = $(window).scrollTop();
-
-	for( var i = 0; i < scrollTips.length; i++ ) {
-		var t = scrollTips[i];
-		var targetHeight = t.target.height();
-
-		if( scrollPos+20 > t.targetPos && scrollPos < t.targetPos + targetHeight ) {
-			if( !t.tip.hasClass('active') ) {
-				if( typeof window.history.replaceState == 'function' ) {
-					history.replaceState({}, '', window.location.href.replace(/#.*$/,'') + '#' + t.name);
-				}
-				t.tip.addClass('active');
-			}
-		}
-		else {
-			t.tip.removeClass('active');
-		}
-
-		var tipPos = ( (windowHeight - ((scrollPos-t.targetPos)/targetHeight) * windowHeight)/1.8 )
-			.limit((i+0.3)*30, windowHeight - (scrollTips.length-i+0.3)*30);
-		t.tip.css('top', tipPos);
-	}
-
-	if( scrollPos+20 < scrollTips[0].targetPos && document.location.href.match(/#.+$/) ) {
-		if( typeof window.history.replaceState == 'function' ) {
-			history.replaceState({}, '', window.location.href.replace(/#.*$/,''));
-		}
-	}
-};
-
-
-var scrollTo = function() {
-	$('#menu-items').hide(); // Always hide hamburger menu on mobile
-
-	var pos = $($(this).attr('href')).offset().top;
-	$('html, body').stop().animate({scrollTop: pos}, 500);
-	return false;
-};
-
-
-
-// ----------------------------------------------------------------------------
-// Background
-
-// rAF polyfill based on https://gist.github.com/1579671 ----------------------
-
+// rAF polyfill based on https://gist.github.com/157967
 var w = window;
 
 // Find vendor prefix, if any
 var vendors = ['ms', 'moz', 'webkit', 'o'];
-for( var i = 0; i < vendors.length && !w.requestAnimationFrame; i++ ) {
+for (var i = 0; i < vendors.length && !w.requestAnimationFrame; i++) {
 	w.requestAnimationFrame = w[vendors[i]+'RequestAnimationFrame'];
 }
 
 // Use requestAnimationFrame if available
-if( w.requestAnimationFrame ) {
+if (w.requestAnimationFrame) {
 	var next = 1,
 		anims = {};
 
-	w.setAnimation = function( callback, element ) {
+	w.setAnimation = function (callback, element) {
 		var current = next++;
 		anims[current] = true;
 
-		var animate = function() {
-			if( !anims[current] ) { return; } // deleted?
-			w.requestAnimationFrame( animate, element );
+		var animate = function () {
+			if (!anims[current]) { return; } // deleted?
+			w.requestAnimationFrame(animate, element);
 			callback();
 		};
-		w.requestAnimationFrame( animate, element );
+		w.requestAnimationFrame(animate, element);
 		return current;
 	};
 
-	w.clearAnimation = function( id ) {
+	w.clearAnimation = function (id) {
 		delete anims[id];
 	};
 }
 
 // [set/clear]Interval fallback
 else {
-	w.setAnimation = function( callback, element ) {
-		return w.setInterval( callback, 1000/60 );
+	w.setAnimation = function (callback, element) {
+		return w.setInterval(callback, 1000/60);
 	}
 	w.clearAnimation = w.clearInterval;
 }
 
 
-// Perlin Noise function for tumbling and dust movement -----------------------
+// Perlin Noise function for tumbling and dust movement
 
-var PerlinNoise = function( size ) {
+var PerlinNoise = function (size) {
 	this.gx = [];
 	this.gy = [];
 	this.p = [];
 	this.size = size || 256;
-	size: 256,
+	// size: 256,
 
 
-	this.size = size || 256;
+	// this.size = size || 256;
 
-	for( var i = 0; i < this.size; i++ ) {
+	for (var i = 0; i < this.size; i++) {
 		this.gx.push( Math.random()*2-1 );
 		this.gy.push( Math.random()*2-1 );
 	}
 
-	for( var j = 0; j < this.size; j++ ) {
-		this.p.push( j );
+	for (var j = 0; j < this.size; j++) {
+		this.p.push(j);
 	}
-	this.p.sort(function() {return 0.5 - Math.random()});
+	this.p.sort(function () { return 0.5 - Math.random(); });
 
-	this.noise2 = function( x, y ) {
+	this.noise2 = function (x, y) {
 		// Compute what gradients to use
 		var qx0 = x | 0;
 		var qx1 = qx0 + 1;
@@ -257,20 +109,20 @@ var PerlinNoise = function( size ) {
 };
 
 
-// Image preloader ------------------------------------------------------------
+// Image preloader
 
-var preload = function( images, callback ) {
+var preload = function (images, callback) {
 	var remaining = 0;
 	var loaded = {};
 
-	var onloadCallback = function( ev ) {
+	var onloadCallback = function (ev) {
 		remaining--;
-		if( !remaining ) {
-			callback( loaded );
+		if (!remaining) {
+			callback(loaded);
 		}
 	};
 
-	for( var i in images ) {
+	for (var i in images) {
 		remaining++;
 		var img = new Image();
 		img.onload = onloadCallback;
@@ -282,14 +134,9 @@ var preload = function( images, callback ) {
 };
 
 
-// Set up ---------------------------------------------------------------------
-
-// Get Canvas, create Noise function, register 'resize' and 'mousemove'
-// handlers and preload images
-
 var canvas = document.getElementById('bg');
 var ctx = null;
-var mouse = {x: 0, y: 0, cx: 0, cy: 0};
+var mouse = { x: 0, y: 0, cx: 0, cy: 0 };
 var blackOverlay = 1;
 var currentIndexTrans = 0;
 var startTime = 0;
@@ -306,10 +153,10 @@ var canvasResize = function() {
 	draw();
 };
 
-document.addEventListener('mousemove', function( ev ) {
-	mouse.x = ev.clientX;
-	mouse.y = ev.clientY;
-}, false);
+// document.addEventListener('mousemove', function( ev ) {
+// 	mouse.x = ev.clientX;
+// 	mouse.y = ev.clientY;
+// }, false);
 
 var images = [];
 var loadBackground = function() {
@@ -341,9 +188,9 @@ var loadBackground = function() {
 
 
 
-// Draw -----------------------------------------------------------------------
+// Draw
 
-var fillImage = function( ctx, img, x, y ) {
+var fillImage = function (ctx, img, x, y) {
 	// This seems to be faster than fillRect with a pattern
 	var cw = ctx.canvas.width,
 		ch = ctx.canvas.height,
@@ -352,9 +199,9 @@ var fillImage = function( ctx, img, x, y ) {
 
 	x = (x%iw - iw) % iw;
 	y = (y%ih - ih) % ih;
-	for( var nx = x; nx < cw; nx += iw ) {
-		for( var ny = y; ny < ch; ny += ih ) {
-			ctx.drawImage( img, nx, ny );
+	for (var nx = x; nx < cw; nx += iw) {
+		for (var ny = y; ny < ch; ny += ih) {
+			ctx.drawImage(img, nx, ny);
 		}
 	}
 };
@@ -365,15 +212,16 @@ function lerp(a, b, t) {
 
 var frameCount = 0;
 var testForSlowBrowsers = true;
-var draw = function() {
+var draw = function () {
 
 	// Test slow systems
 	frameCount++;
-	var seconds = (Date.now() - startTime)/1000;
-	if( seconds > 1 && testForSlowBrowsers ) {
+	var seconds = (Date.now() - startTime) / 1000;
+	if (seconds > 1 && testForSlowBrowsers) {
+		startTime = Date.now();
 		// Fewer than 20 frames in the last second? Disable background :/
-		if( frameCount < 20 ) {
-			clearAnimation( backgroundAnimation );
+		if (frameCount < 20) {
+			clearAnimation(backgroundAnimation);
 			blackOverlay = 0;
 		}
 		testForSlowBrowsers = false;
@@ -388,9 +236,9 @@ var draw = function() {
 
 	// Aspect zoom
 	var width = cw;
-	var height = Math.ceil(images.bg.height / (images.bg.width / cw ));
-	if( height < canvas.height ) {
-		width = Math.ceil(images.bg.width / (images.bg.height / ch ));
+	var height = Math.ceil(images.bg.height / (images.bg.width / cw));
+	if (height < canvas.height) {
+		width = Math.ceil(images.bg.width / (images.bg.height / ch));
 		height = ch;
 	}
 
@@ -400,68 +248,61 @@ var draw = function() {
 
 	var mx = -(mouse.cx / canvas.width) * tumble;
 	var my = -(mouse.cy / canvas.height) * tumble;
-	var x = noise.noise2( i/193, i/233)*tumble + mx;
+	var x = noise.noise2(i/193, i/233)*tumble + mx;
 	// var y = 0 +  + noise.noise2( i/241, i/211)*tumble + my + tumble;
-	var y = noise.noise2( i/241, i/211)*tumble + my;
+	var y = noise.noise2(i/241, i/211)*tumble + my;
 
 	var scale = images.bg.width / width;
 	var scroll = $(document).scrollTop();
 	var scroll_param = Math.min(1, scroll / (0.8*window.innerHeight));
 
 	ctx.globalAlpha = 1;
-	ctx.fillStyle = '#111';
+	ctx.fillStyle = '#111111';
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	var cx = (canvas.width - width) / 2,
+		cy = (canvas.height - height) / 2
 
 	// Blurred BG
 	if (scroll_param > 0) {
-		// ctx.globalCompositeOperation = 'lighter';
-		// ctx.globalAlpha = lerp(0, 0.5, scroll_param);
 		ctx.globalAlpha = 0.6;
-		ctx.drawImage( images.bg_blur, (canvas.width - width) / 2, (canvas.height - height)/2, width, height );
+		ctx.drawImage(images.bg_blur, cx, cy, width, height);
 	}
 
 	// BG
-	// ctx.globalAlpha = 1;
 	ctx.globalAlpha = lerp(1, 0, scroll_param);
-	// ctx.drawImage( images.bg, x + (canvas.width - width) / 2, y, width, height );
-	ctx.drawImage( images.bg, (canvas.width - width) / 2, (canvas.height - height)/2, width, height );
+	ctx.drawImage(images.bg, cx, cy, width, height);
 
-
-	// Dust Layers
-	var dx = x + i/5,
-		dy = y + i/15 - scroll/8; // extra vert scroll for dust layers
-	// var dx = x/10,
-	// 	dy = y/10 - $(document).scrollTop()/8; // extra vert scroll for dust layers
-
-	// Scanlines
+	// Grid
 	ctx.globalAlpha = 0.5;
-	fillImage( ctx, images.graphy, 0, -0.1 * scroll );
+	fillImage(ctx, images.graphy, 0, -0.1 * scroll);
 
 	// Logo
 	ctx.globalAlpha = lerp(0.75, 0.0, scroll_param);
 	var aspect = images.logo.width / images.logo.height;
 	var logo_w = lerp(480, 400, scroll_param);
-	// ctx.drawImage( images.logo, (canvas.width - logo_w)/2, 280 - 0.25*scroll, logo_w, logo_w / aspect);
-	ctx.drawImage( images.logo, x + (canvas.width - logo_w)/2, y + 160 - 0.1*scroll, logo_w, logo_w / aspect);
+	ctx.drawImage(images.logo, x + (canvas.width - logo_w)/2, y + 100 - 0.1*scroll, logo_w, logo_w / aspect);
 
+	// Dust
+	var dx = x + i/5,
+		dy = y + i/15 - scroll/8;
 	ctx.globalAlpha = 0.4;
 	ctx.globalCompositeOperation = 'lighter';
-	fillImage( ctx, images.dustFar, dx, dy );
+	fillImage(ctx, images.dustFar, dx, dy);
 	ctx.globalAlpha = 0.3;
-	fillImage( ctx, images.dustNear, dx * 2.5, dy * 2.5 );
+	fillImage(ctx, images.dustNear, dx * 2.5, dy * 2.5);
 	ctx.globalAlpha = 0.1;
-	fillImage( ctx, images.dustNear, dx * 15, dy * 15 );
+	fillImage(ctx, images.dustNear, dx * 15, dy * 15);
 
 	// Vignette
 	ctx.globalAlpha = 0.7;
 	ctx.globalCompositeOperation = 'source-over';
-	ctx.drawImage( images.vignette, 0, 0, canvas.width, canvas.height );
+	ctx.drawImage(images.vignette, 0, 0, canvas.width, canvas.height);
 
 	// Fade from black overlay after loading
-	if( blackOverlay > 0 ) {
+	if (blackOverlay > 0) {
 		ctx.globalAlpha = blackOverlay;
 		ctx.fillStyle = '#111111';
-		ctx.fillRect(0, 0, canvas.width, canvas.height );
+		ctx.fillRect(0, 0, canvas.width, canvas.heightazzzzzzzzzz);
 		blackOverlay -= 0.01;
 	}
 };
@@ -471,7 +312,6 @@ var MS_PER_MINUTE = 60 * MS_PER_SECOND;
 var MS_PER_HOUR = 60 * MS_PER_MINUTE;
 var MS_PER_DAY = 24 * MS_PER_HOUR;
 var TARGET_DATE = "2017-11-04T18:00:00.000Z";
-// var TARGET_DATE = "2017-09-04T18:00:00.000Z";
 
 function initCountdown() {
 	$('#countdown').show();
@@ -480,8 +320,6 @@ function initCountdown() {
 	var ctx = canvas.getContext('2d');
 	canvas.width = 480;
 	canvas.height = 32;
-	// ctx.fillStyle = "#000000";
-	// ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 	var target = new Date(TARGET_DATE);
 	var now = Date.now();
@@ -505,9 +343,7 @@ function initCountdown() {
 		ctx.lineTo(x+w, h);
 		ctx.lineTo(x, 0);
 		ctx.fill();
-
 	}
-	// ctx.endPath();
 
 	updateCountdown();
 	setInterval(updateCountdown, 1000);
@@ -552,11 +388,18 @@ function saveText() {
 	var symbols = "~?/_[])#|!%^@+*(>;<&$=12345678901234567890";
 
 	function encode(txt, offset, limit) {
-		return Array.prototype.map.call(txt, function (l, i) {
+		return Array.prototype.map.call(txt.trim(), function (l, i) {
 			var o = i < limit ? offset : 0;
 			return symbols[(l.charCodeAt(0) + o) % symbols.length];
 		}).join('');
 	}
+
+	$('.event-info .decode-in').each(function (i, el) {
+		$(el).data('original', $(el).text());
+		$(el).text(encode($(el).text(), i, 0));
+		setTimeout(typeText.bind(null, el, '', d1), 1000);
+	});
+
 
 	$('.section .section-head h1, .section .section-head h2').each(function (i, el) {
 		$(el).data('original', $(el).text());
@@ -593,25 +436,9 @@ function saveText() {
 }
 
 
-// ----------------------------------------------------------------------------
-// Init
-
-
-initMenu();
 loadBackground();
 initCountdown();
 saveText();
 
-// Resize everything and listen to resize events
-// Load columnWidth once
-var columnWidths = [
-	parseInt(getStyleValue('<div class="columns-1"/>', 'width')),
-	parseInt(getStyleValue('<div class="columns-2"/>', 'width')),
-	parseInt(getStyleValue('<div class="columns-3"/>', 'width'))
-];
-
-onresize();
-$(window).resize(onresize);
-
-}(window));
+});
 
