@@ -222,11 +222,12 @@ a:hover {
 
 #apply-btn {
 	display: inline-block;
-	padding: 8px 22px 6px 32px;
+	padding: 10px 22px 6px 32px;
+    background-color: rgba(255,255,255,0.1);
 	border: 1px solid rgba(255,255,255,0.5);
 	border-left: 0;
 	border-right: 0;
-	color: rgba(255, 255, 255, 0.75);
+    color: rgba(255,255,255,0.5);
 	font-size: 24px;
 	letter-spacing: 12px;
 	font-weight: 600;
@@ -240,7 +241,7 @@ a:hover {
 	font-weight: 300;
 	display: inline-block;
 	content: '>';
-	opacity: 0.5;
+	//opacity: 0.5;
 	transform: translateX(-8px);
 	transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
@@ -249,7 +250,7 @@ a:hover {
 	font-weight: 300;
 	display: inline-block;
 	content: '<';
-	opacity: 0.5;
+	//opacity: 0.5;
 	transform: translateX(8px);
 	transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
@@ -257,7 +258,7 @@ a:hover {
 #apply-btn:hover {
 	border-color: rgba(255,255,255,1);
 	color: rgba(255, 255, 255, 1);
-	background-color: rgba(255,255,255,0.1);
+	background-color: rgba(255,255,255,0.2);
 	transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1),
 		opacity 0.25s linear;
 }
@@ -269,9 +270,9 @@ a:hover {
 }
 
 #apply-btn:active {
-	border-color: rgba(203,0,0,1);
 	color: rgba(203, 0, 0, 1);
 	background-color: rgba(203,0,0,0.25);
+	border-color: rgba(203,0,0,1);
 	transition: none;
 }
 

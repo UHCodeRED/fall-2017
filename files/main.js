@@ -255,6 +255,7 @@ var draw = function () {
 	var scale = images.bg.width / width;
 	var scroll = $(document).scrollTop();
 	var scroll_param = Math.min(1, scroll / (0.8*window.innerHeight));
+	var scroll_param2 = Math.min(1, scroll / (0.25*window.innerHeight));
 
 	ctx.globalAlpha = 1;
 	ctx.fillStyle = '#111111';
@@ -263,13 +264,13 @@ var draw = function () {
 		cy = (canvas.height - height) / 2
 
 	// Blurred BG
-	if (scroll_param > 0) {
-		ctx.globalAlpha = 0.6;
+	//if (scroll_param > 0) {
+	    ctx.globalAlpha = lerp(0, 0.5, scroll_param);
 		ctx.drawImage(images.bg_blur, cx, cy, width, height);
-	}
+	//}
 
 	// BG
-	ctx.globalAlpha = lerp(1, 0, scroll_param);
+	ctx.globalAlpha = lerp(0.4, 0, scroll_param);
 	ctx.drawImage(images.bg, cx, cy, width, height);
 
 	// Grid
@@ -277,20 +278,20 @@ var draw = function () {
 	fillImage(ctx, images.graphy, 0, -0.1 * scroll);
 
 	// Logo
-	ctx.globalAlpha = lerp(0.75, 0.0, scroll_param);
+	ctx.globalAlpha = lerp(0.75, 0.0, scroll_param2);
 	var aspect = images.logo.width / images.logo.height;
-	var logo_w = lerp(480, 400, scroll_param);
+	var logo_w = lerp(480, 400, scroll_param2);
 	ctx.drawImage(images.logo, x + (canvas.width - logo_w)/2, y + 100 - 0.1*scroll, logo_w, logo_w / aspect);
 
 	// Dust
 	var dx = x + i/5,
 		dy = y + i/15 - scroll/8;
-	ctx.globalAlpha = 0.4;
+	ctx.globalAlpha = 0.2;
 	ctx.globalCompositeOperation = 'lighter';
 	fillImage(ctx, images.dustFar, dx, dy);
-	ctx.globalAlpha = 0.3;
-	fillImage(ctx, images.dustNear, dx * 2.5, dy * 2.5);
 	ctx.globalAlpha = 0.1;
+	fillImage(ctx, images.dustNear, dx * 2.5, dy * 2.5);
+	ctx.globalAlpha = 0.05;
 	fillImage(ctx, images.dustNear, dx * 15, dy * 15);
 
 	// Vignette
