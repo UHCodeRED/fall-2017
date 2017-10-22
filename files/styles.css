@@ -390,6 +390,14 @@ div.section-head {
 	text-align: center;
 }
 
+.full-width-image {
+    width: 100%;
+}
+
+a.invisible-link {
+    border: none;
+}
+
 #foot {
 	padding-top: 64px;
 }

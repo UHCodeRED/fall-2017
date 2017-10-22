@@ -254,8 +254,8 @@ var draw = function () {
 
 	var scale = images.bg.width / width;
 	var scroll = $(document).scrollTop();
-	var scroll_param = Math.min(1, scroll / (0.8*window.innerHeight));
-	var scroll_param2 = Math.min(1, scroll / (0.25*window.innerHeight));
+	var scroll_param = Math.max(0, Math.min(1, scroll / (0.8*window.innerHeight)));
+	var scroll_param2 = Math.max(0, Math.min(1, scroll / (0.25*window.innerHeight)));
 
 	ctx.globalAlpha = 1;
 	ctx.fillStyle = '#111111';
@@ -264,10 +264,8 @@ var draw = function () {
 		cy = (canvas.height - height) / 2
 
 	// Blurred BG
-	//if (scroll_param > 0) {
-	    ctx.globalAlpha = lerp(0, 0.5, scroll_param);
-		ctx.drawImage(images.bg_blur, cx, cy, width, height);
-	//}
+    ctx.globalAlpha = lerp(0, 0.5, scroll_param);
+    ctx.drawImage(images.bg_blur, cx, cy, width, height);
 
 	// BG
 	ctx.globalAlpha = lerp(0.4, 0, scroll_param);

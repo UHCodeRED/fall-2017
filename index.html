@@ -48,19 +48,19 @@
 						<span class="column-box decode-in">experience</span>
 					</p>
 					<div class="columns">
-						<div class="column-box event-track decode-in">
-							AR/VR
+						<div class="column-box event-track">
+							<abbr class="decode-in" title="Augmented Reality/Virtual Reality">AR/VR</abbr>
 						</div>
-						<div class="column-box event-track decode-in">
-							IoT
+						<div class="column-box event-track">
+							<abbr class="decode-in" title="Internet of Things">IoT</abbr>
 						</div>
 						<div class="column-box event-track decode-in">
 							Data Science
 						</div>
 					</div>
 					<div class="columns">
-						<div class="column-box event-partner decode-in">
-							MLH
+						<div class="column-box event-partner">
+							<abbr class="decode-in" title="Major League Hacking">MLH</abbr>
 						</div>
 						<div class="column-box event-year decode-in">
 							2017
@@ -95,6 +95,12 @@
 				<h1>About CodeRED</h1>
 				<h2></h2>
 			</div>
+
+            <div class="section-content">
+                <a target="_blank" href="https://www.facebook.com/pg/MajorLeagueHacking/photos/?tab=album&album_id=1261189120598430" class="invisible-link">
+                    <img src="/files/album-cover.png" class="full-width-image">
+                </a>
+            </div>
 
 			<div class="section-content columns columns-2">
 
@@ -273,13 +279,23 @@
 			<div class="section-content columns">
 				<ul class="companies column-box">
                     <li>
-                        <a href="http://www.casingequipment.com">
-                            <img class="company-logo" src="files/logos/Citadel.svg" alt="Citadel Casing Solutions">
+                        <a href="https://www.hcss.com">
+                            <img class="company-logo" src="files/logos/HCSS.svg" alt="HCSS">
                         </a>
                     </li>
                     <li>
                         <a href="http://www.simhouston.org">
-                            <img class="company-logo" src="files/logos/SIM.svg" alt="Society for Information Management (SIM): Houston Chapter">
+                            <img class="company-logo" src="files/logos/SIM.svg" alt="Society for Information Management (SIM) | Where IT Leaders Connect - Houston Chapter">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.pros.com">
+                            <img class="company-logo" src="files/logos/PROS.svg" alt="PROS">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.casingequipment.com">
+                            <img class="company-logo" src="files/logos/Citadel.svg" alt="Citadel Casing Solutions">
                         </a>
                     </li>
                     <li>
@@ -317,18 +333,18 @@
 							<img class="company-logo" src="files/logos/CSGirls.svg" alt="CSGirls">
 						</a>
 					</li>
-					<li>
-						<a href="http://redlabs.uh.edu.org">
-							<img class="company-logo" src="files/logos/REDLabs.svg" alt="RED Labs">
-						</a>
-					</li>
 					<!--<li>
-						<a href="https://www.simnet.org">
-							<img class="company-logo" src="files/SIM.svg" alt="SIM | Where IT Leaders Connect">
+						<a href="http://redlabs.uh.edu">
+							<img class="company-logo" src="files/logos/REDLabs.svg" alt="RED Labs">
 						</a>
 					</li>-->
 				</ul>
 			</div>
+			<div class="note">
+                <p>Interested in sponsoring? Drop us a line at
+                <a href="mailto:hackathon@cougarcs.com">hackathon@cougarcs.com</a>
+                and we will send you more information!</p>
+            </div>
 		</div>
 <!--
 		<div id="organizers" class="section">
@@ -338,7 +354,7 @@
 			</div>
 			<div class="section-content columns columns-1">
 				<div class="organizer-grid">
-					<!- {% for organizer in site.data.organizers %}
+					{% for organizer in site.data.organizers %}
 					<div class="organizer">
 						<div class="organizer-bg" style="background-image: url(files/organizers/{{ organizer.photo }});"></div>
 						<div class="organizer-info">
@@ -346,7 +362,7 @@
 							<span class="organizer-role">{{ organizer.role }}</span>
 						</div>
 					</div>
-					{% endfor %} ->
+					{% endfor %}
 					<div class="organizer">
 						<div class="organizer-bg" style="background-image: url(files/organizers/max.jpg);"></div>
 						<div class="organizer-info">
