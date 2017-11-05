@@ -25,5 +25,24 @@ canvas {
   <canvas id="stars"></canvas>
   <img id="logo" src="../files/new-logo.svg"/>
   <script  src="js/index.js"></script>
+  <script>
+    var urlParams;
+    (window.onpopstate = function () {
+        var match,
+            pl     = /\+/g,  // Regex for replacing addition symbol with a space
+            search = /([^&=]+)=?([^&]*)/g,
+            decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+            query  = window.location.search.substring(1);
+
+        urlParams = {};
+        while (match = search.exec(query))
+           urlParams[decode(match[1])] = decode(match[2]);
+
+        console.log(urlParams);
+        if (urlParams.hasOwnProperty("nologo")) {
+          document.body.removeChild(document.getElementById("logo"));
+        }
+    })();
+  </script>
 </body>
 </html>
