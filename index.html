@@ -12,6 +12,45 @@
 	<script src="files/main.js"></script>
 	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.41.0/mapbox-gl.js'></script>
 	<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.41.0/mapbox-gl.css' rel='stylesheet' />
+	<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		#mc_embed_signup{background:rgba(0,0,0,0); clear:left; font:15px Helvetica,Arial,sans-serif; }
+		/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+			 We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+			 input[type="text"], input[type="email"]{
+				 background-color: rgba(0,0,0,0);
+				 border: solid 2px #ccc;
+				 color: #ccc;
+				 font-family: 'Overpass-web', sans-serif;
+				 font-size: 16px;
+			 }
+			 .asterisk{
+				 color: #CC0000;
+			 }
+			 .mc-field-group{
+				 padding: 3px 0;
+			 }
+
+			 #email-field{
+				 margin-left: -35px
+			 }
+			 #mc-embedded-subscribe{
+				 background-color: #CC0000;
+				 border:none;
+				 font-size: 16px;
+				 font-family: 'Overpass-web', sans-serif;
+				 margin: 10px 0;
+				 width: 150px;
+			 }
+			 #mc-embedded-subscribe:active{
+				 box-shadow: inset 0 0 2px 1px rgba(0,0,0,.75);
+				 color: #000;
+			 }
+			 #mc-embedded-subscribe:focus{
+				 outline: none;
+			 }
+	</style>
+
 </head>
 <body>
 	<canvas id="bg"></canvas>
@@ -45,27 +84,39 @@
 					</div>
 				</div>
 			</div>
-
+			<br/>
 			<div id="main-actions">
-				<!-- <a id="apply-btn" class="typeform-share button" href="https://coderedexploration.typeform.com/to/sPGlhn" data-mode="popup" data-hide-footer="true" data-hide-headers="true" data-transparency="100">
-					Apply
-				</a> -->
-				<!--<a id="apply-btn" href="/apply/">
-					Apply
-				</a>-->
-				<p>Applications are now closed.</p>
-			</div>
-			<!-- <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm_share", b="https://embed.typeform.com/"; if(!gi.call(d,id)){ js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script> -->
+				<!-- Begin MailChimp Signup Form -->
 
-			<!--<div id="countdown" class="section-content">
-				<h2>Event launch in</h2>
-				<div class="timer">
-					T<span class="sign">-</span><span class="days">??</span>:<span class="hours">??</span>:<span class="minutes">??</span>:<span class="seconds">??</span>
+				<div id="mc_embed_signup">
+				<form action="https://cougarcs.us12.list-manage.com/subscribe/post?u=b215cfccc354f423d38e9db4b&amp;id=3dc4c4603d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+				    <div id="mc_embed_signup_scroll">
+					<h2>Subscribe to our mailing list to receive updates</h2>
+				<div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+				<div class="mc-field-group" id="email-field">
+					<label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
+				</label>
+					<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
 				</div>
-				<div class="progress-bar">
-					<canvas id="countdown-progress" width="480" height="32"></canvas>
+				<div class="mc-field-group">
+					<label for="mce-FNAME">First Name </label>
+					<input type="text" value="" name="FNAME" class="" id="mce-FNAME">
 				</div>
-			</div>-->
+				<div class="mc-field-group">
+					<label for="mce-LNAME">Last Name </label>
+					<input type="text" value="" name="LNAME" class="" id="mce-LNAME">
+				</div>
+					<div id="mce-responses" class="clear">
+						<div class="response" id="mce-error-response" style="display:none"></div>
+						<div class="response" id="mce-success-response" style="display:none"></div>
+					</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+				    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_b215cfccc354f423d38e9db4b_3dc4c4603d" tabindex="-1" value=""></div>
+				    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+				    </div>
+				</form>
+			</div>
+
+<!--End mc_embed_signup-->
 		</div>
 
 		<div id="about" class="section">
