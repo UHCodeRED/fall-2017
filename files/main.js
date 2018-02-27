@@ -177,7 +177,7 @@ var loadBackground = function() {
 			dustNear: 'files/background/dust-near.jpg',
 			dustFar: 'files/background/dust-far.jpg',
 			graphy: 'files/background/graphy-dark2.png',
-			logo: 'files/codered-logo.png'
+			logo: 'files/codered-blank-logo.png'
 		}, function() {
 			startTime = Date.now();
 			backgroundAnimation = setAnimation( draw, canvas );
