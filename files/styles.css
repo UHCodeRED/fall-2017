@@ -219,6 +219,9 @@ a:hover {
 	text-align: center;
 }
 
+.apply-container{
+	margin: 10px auto;
+}
 
 #apply-btn {
 	display: inline-block;
